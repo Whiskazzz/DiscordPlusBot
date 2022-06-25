@@ -1,1 +1,1 @@
-Worker: java src.main.java.App.java
+Worker: App.java
