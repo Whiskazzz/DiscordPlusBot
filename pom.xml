@@ -7,6 +7,18 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals><goal>copy-dependencies</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
@@ -29,7 +41,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>App.java</mainClass>
+							<mainClass>App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -61,7 +73,7 @@
 		</plugins>
 
 	</build>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>Databinder Application</name>
 	<dependencies>
@@ -93,13 +105,16 @@
 		</dependency>
 	</dependencies>
 
-<!-- uncomment to download prerelease versions of Databinder
+
 	<repositories>
 		<repository>
-			<id>databinder-snapshots</id>
-			<name>Databinder snapshot repository</name>
-			<url>http://databinder.net/snapshot</url>
+			<id>jcenter</id>
+			<name>jcenter-bintray</name>
+			<url>https://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<id>lib</id>
+			<url>file://${project.basedir}/libs</url>
 		</repository>
 	</repositories>
--->
 </project>

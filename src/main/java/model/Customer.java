@@ -1,11 +1,14 @@
 package model;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Customers")
-public class Customer {
+public class Customer implements Comparable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,5 +82,30 @@ public class Customer {
 
     public void setDiscordId(Long discordId) {
         this.discordId = discordId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return plusCount.equals(customer.plusCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(plusCount);
+    }
+
+    @Override
+    public int compareTo(@NotNull Object o) {
+        Customer customer = (Customer) o;
+        if (plusCount == customer.plusCount) {
+            return 0;
+        } else if (plusCount > customer.plusCount) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
